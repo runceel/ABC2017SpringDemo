@@ -4,5 +4,30 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.MainPage"
-             Title="MainPage">
+             Title="ABC2017Spring ~ Album ~">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <Grid>
+        <ListView ItemsSource="{Binding Tags}"
+                  CachingStrategy="RecycleElement"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding AnalyzeCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Tag}"
+                              Detail="{Binding ExampleTweet.Text}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Frame BackgroundColor="LightGray"
+               Opacity="0.5"
+               IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="True" 
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand"/>
+        </Frame>
+    </Grid>
 </ContentPage>

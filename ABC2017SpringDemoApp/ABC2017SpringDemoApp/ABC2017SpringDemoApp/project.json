@@ -3,9 +3,11 @@
   "dependencies": {
     "Autofac": "4.6.0",
     "CoreTweet": "0.8.0.384",
+    "Microsoft.ProjectOxford.Vision": "1.0.393",
     "Newtonsoft.Json": "10.0.2",
     "Prism.Autofac.Forms": "6.3.0",
     "System.Runtime": "4.3.0",
+    "System.ValueTuple": "4.3.1",
     "Xamarin.Forms": "2.3.4.247"
   },
   "frameworks": {
