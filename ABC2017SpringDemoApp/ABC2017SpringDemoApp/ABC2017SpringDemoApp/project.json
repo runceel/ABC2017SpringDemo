@@ -5,10 +5,11 @@
     "CoreTweet": "0.8.0.384",
     "Newtonsoft.Json": "10.0.2",
     "Prism.Autofac.Forms": "6.3.0",
+    "System.Runtime": "4.3.0",
     "Xamarin.Forms": "2.3.4.247"
   },
   "frameworks": {
-    "netstandard1.6": {
+    "netstandard1.3": {
       "imports": "portable-net45+uap"
     }
   }
