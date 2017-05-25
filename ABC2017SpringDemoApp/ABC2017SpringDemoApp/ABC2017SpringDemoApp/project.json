@@ -8,7 +8,7 @@
     "Prism.Autofac.Forms": "6.3.0",
     "System.Runtime": "4.3.0",
     "System.ValueTuple": "4.3.1",
-    "Xamarin.Forms": "2.3.4.247"
+    "Xamarin.Forms": "2.3.5.239-pre3"
   },
   "frameworks": {
     "netstandard1.3": {

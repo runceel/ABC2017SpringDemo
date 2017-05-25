@@ -45,9 +45,13 @@
     <Compile Include="Services\IVisionService.cs" />
     <Compile Include="Services\TwitterService.cs" />
     <Compile Include="Services\VisionService.cs" />
+    <Compile Include="ViewModels\ImageListPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\SplashScreenPageViewModel.cs" />
     <Compile Include="ViewModels\TagGroupViewModel.cs" />
+    <Compile Include="Views\ImageListPage.xaml.cs">
+      <DependentUpon>ImageListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SplashScreenPage.xaml.cs">
       <DependentUpon>SplashScreenPage.xaml</DependentUpon>
     </Compile>
@@ -78,6 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ImageListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!--<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />-->

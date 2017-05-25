@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.SplashScreenPage">
     <StackLayout VerticalOptions="Center">
-        <Label Text="ABC2017Spring"
+        <Label Text="ABC2017 Spring"
                FontSize="Large"
                HorizontalOptions="Center"
                TextColor="LimeGreen" />

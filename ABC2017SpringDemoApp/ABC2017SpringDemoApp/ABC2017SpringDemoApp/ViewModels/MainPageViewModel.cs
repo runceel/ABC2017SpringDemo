@@ -15,6 +15,7 @@ namespace ABC2017SpringDemoApp.ViewModels
     {
         private ITwitterService TwitterServhce { get; }
         private IVisionService VisionService { get; }
+        private INavigationService NavigationService { get; }
 
         private IEnumerable<TagGroupViewModel> tags;
 
@@ -34,12 +35,25 @@ namespace ABC2017SpringDemoApp.ViewModels
 
         public DelegateCommand AnalyzeCommand { get; }
 
+        public DelegateCommand<TagGroupViewModel> NavigateImageListPageCommand { get; }
 
-        public MainPageViewModel(ITwitterService twitterService, IVisionService visionService)
+
+        public MainPageViewModel(ITwitterService twitterService, IVisionService visionService, INavigationService navigationService)
         {
             this.TwitterServhce = twitterService;
             this.VisionService = visionService;
+            this.NavigationService = navigationService;
+
             this.AnalyzeCommand = new DelegateCommand(async () => await this.AnalyzeExecuteAsync());
+            this.NavigateImageListPageCommand = new DelegateCommand<TagGroupViewModel>(async x => await this.NavigateImageListPageExecuteAsync(x));
+        }
+
+        private async Task NavigateImageListPageExecuteAsync(TagGroupViewModel x)
+        {
+            await this.NavigationService.NavigateAsync("ImageListPage", new NavigationParameters
+            {
+                { "data", x },
+            });
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -49,6 +63,11 @@ namespace ABC2017SpringDemoApp.ViewModels
         public void OnNavigatedTo(NavigationParameters parameters)
         {
             if (parameters == null)
+            {
+                return;
+            }
+
+            if (this.Tags != null)
             {
                 return;
             }

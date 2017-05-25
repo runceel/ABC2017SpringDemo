@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ABC2017SpringDemoApp.Views.ImageListPage"
+             Title="{Binding Data.Tag, StringFormat='ABC2017 Spring ~ {0} ~'}">
+    <ListView ItemsSource="{Binding Data.Images}"
+              ItemSelected="ListView_ItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell ImageSource="{Binding Image}"
+                           Text="{Binding OriginalTweet.Text}"
+                           Detail="{Binding OriginalTweet.User, StringFormat='@{0}'}" 
+                           Height="100" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

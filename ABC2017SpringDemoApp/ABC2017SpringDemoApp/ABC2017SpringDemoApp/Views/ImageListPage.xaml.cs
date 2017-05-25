@@ -2,9 +2,9 @@
 
 namespace ABC2017SpringDemoApp.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class ImageListPage : ContentPage
     {
-        public MainPage()
+        public ImageListPage()
         {
             InitializeComponent();
         }

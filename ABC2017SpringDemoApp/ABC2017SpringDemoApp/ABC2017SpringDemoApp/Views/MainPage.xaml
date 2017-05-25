@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:Behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.MainPage"
-             Title="ABC2017Spring ~ Album ~">
+             Title="ABC2017 Spring ~ Album ~">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS">0,20,0,0</On>
@@ -14,7 +15,13 @@
         <ListView ItemsSource="{Binding Tags}"
                   CachingStrategy="RecycleElement"
                   IsPullToRefreshEnabled="True"
-                  RefreshCommand="{Binding AnalyzeCommand}">
+                  RefreshCommand="{Binding AnalyzeCommand}"
+                  ItemSelected="ListView_ItemSelected">
+            <ListView.Behaviors>
+                <Behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                  Command="{Binding NavigateImageListPageCommand}"
+                                                  EventArgsParameterPath="SelectedItem"/>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Tag}"

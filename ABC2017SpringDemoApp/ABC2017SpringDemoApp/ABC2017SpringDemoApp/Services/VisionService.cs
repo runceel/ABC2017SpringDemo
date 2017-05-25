@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ABC2017SpringDemoApp.BusinessObjects;
 using Microsoft.ProjectOxford.Vision;
+using System.Diagnostics;
 
 namespace ABC2017SpringDemoApp.Services
 {
@@ -25,15 +26,22 @@ namespace ABC2017SpringDemoApp.Services
             var results = new List<TaggedImage>();
             foreach (var image in images)
             {
-                var r = await this.VisionServiceClient.AnalyzeImageAsync(image.image, null);
-                results.AddRange(r.Categories.Select(x => new TaggedImage
+                try
                 {
-                    Image = image.image,
-                    Tag = x.Name,
-                    OriginalTweet = image.tweet,
-                }));
+                    var r = await this.VisionServiceClient.AnalyzeImageAsync(image.image, null);
+                    results.AddRange(r.Categories.Select(x => new TaggedImage
+                    {
+                        Image = image.image,
+                        Tag = x.Name,
+                        OriginalTweet = image.tweet,
+                    }));
+                }
+                catch (TaskCanceledException ex)
+                {
+                    Debug.WriteLine(ex);
+                }
                 // 10 call / 1sec
-                await Task.Delay(100);
+                await Task.Delay(150);
             }
             return results;
         }

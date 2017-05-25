@@ -31,6 +31,7 @@ namespace ABC2017SpringDemoApp
             this.Container.RegisterTypeForNavigation<NavigationPage>();
             this.Container.RegisterTypeForNavigation<MainPage>();
             this.Container.RegisterTypeForNavigation<SplashScreenPage>();
+            this.Container.RegisterTypeForNavigation<ImageListPage>();
         }
     }
 }
