@@ -1,12 +1,14 @@
 ﻿{
   "supports": {},
   "dependencies": {
+    "Autofac": "4.6.0",
     "CoreTweet": "0.8.0.384",
+    "Newtonsoft.Json": "10.0.2",
     "Prism.Autofac.Forms": "6.3.0",
     "Xamarin.Forms": "2.3.4.247"
   },
   "frameworks": {
-    "netstandard1.3": {
+    "netstandard1.6": {
       "imports": "portable-net45+uap"
     }
   }

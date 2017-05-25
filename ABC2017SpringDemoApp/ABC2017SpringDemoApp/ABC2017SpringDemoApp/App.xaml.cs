@@ -10,17 +10,17 @@ namespace ABC2017SpringDemoApp
     {
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage?title=Hello%20from%20Xamarin.Forms");
+            await this.NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes()
         {
-            Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<MainPage>();
+            this.Container.RegisterTypeForNavigation<NavigationPage>();
+            this.Container.RegisterTypeForNavigation<MainPage>();
         }
     }
 }
