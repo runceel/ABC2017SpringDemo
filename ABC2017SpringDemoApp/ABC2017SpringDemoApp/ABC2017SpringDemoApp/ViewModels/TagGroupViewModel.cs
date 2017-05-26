@@ -10,7 +10,9 @@ namespace ABC2017SpringDemoApp.ViewModels
     public class TagGroupViewModel
     {
         public string Tag { get; set; }
+        public string JpTag { get; set; }
         public IEnumerable<TaggedImage> Images { get; set; }
         public TwitterSearchResult ExampleTweet => this.Images.FirstOrDefault()?.OriginalTweet;
+        public string ThemeColor => this.Images.FirstOrDefault()?.ThemeColor;
     }
 }

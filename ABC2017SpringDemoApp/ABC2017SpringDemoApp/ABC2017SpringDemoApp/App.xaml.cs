@@ -4,6 +4,8 @@ using Prism.Autofac.Forms;
 using ABC2017SpringDemoApp.Views;
 using Xamarin.Forms;
 using ABC2017SpringDemoApp.Services;
+using System.Diagnostics;
+using System;
 
 namespace ABC2017SpringDemoApp
 {
@@ -14,7 +16,6 @@ namespace ABC2017SpringDemoApp
         protected override async void OnInitialized()
         {
             this.InitializeComponent();
-
             await this.NavigationService.NavigateAsync("SplashScreenPage");
             await this.Container.Resolve<ITwitterService>().InitializeAsync();
             await this.NavigationService.NavigateAsync("/NavigationPage/MainPage");
@@ -25,6 +26,7 @@ namespace ABC2017SpringDemoApp
             var b = new ContainerBuilder();
             b.RegisterType<TwitterService>().As<ITwitterService>().SingleInstance();
             b.RegisterType<VisionService>().As<IVisionService>().SingleInstance();
+            b.RegisterType<TranslatorService>().As<ITranslatorService>().SingleInstance();
             // 新しいAutofacではUpdateは非推奨らしいが今のところ回避策が見つからないので使う…
             b.Update(this.Container);
 

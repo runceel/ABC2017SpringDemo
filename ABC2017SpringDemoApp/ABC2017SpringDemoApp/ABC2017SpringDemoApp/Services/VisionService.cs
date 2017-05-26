@@ -12,9 +12,11 @@ namespace ABC2017SpringDemoApp.Services
     public class VisionService : IVisionService
     {
         private IVisionServiceClient VisionServiceClient { get; }
+        private ITranslatorService TranslateService { get; }
 
-        public VisionService()
+        public VisionService(ITranslatorService translateService)
         {
+            this.TranslateService = translateService;
             this.VisionServiceClient = new VisionServiceClient(
                 Secrets.CognitiveServiceComputerVisionAPIKey,
                 Consts.CognitiveServicesEndpoint);
@@ -28,12 +30,21 @@ namespace ABC2017SpringDemoApp.Services
             {
                 try
                 {
-                    var r = await this.VisionServiceClient.AnalyzeImageAsync(image.image, null);
+                    var r = await this.VisionServiceClient.AnalyzeImageAsync(image.image, visualFeatures: new[] 
+                    {
+                        VisualFeature.Color,
+                        VisualFeature.Description,
+                        VisualFeature.Categories,
+                    });
+                    var jpCaption = await this.TranslateService.TranslateToJapaneseAsync(r.Description?.Captions.FirstOrDefault()?.Text ?? "");
                     results.AddRange(r.Categories.Select(x => new TaggedImage
                     {
                         Image = image.image,
                         Tag = x.Name,
                         OriginalTweet = image.tweet,
+                        Caption = r.Description?.Captions.FirstOrDefault()?.Text,
+                        ThemeColor = $"#{r.Color.AccentColor}",
+                        JpCaption = jpCaption,
                     }));
                 }
                 catch (TaskCanceledException ex)

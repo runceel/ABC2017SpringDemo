@@ -16,25 +16,62 @@
                   CachingStrategy="RecycleElement"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding AnalyzeCommand}"
-                  ItemSelected="ListView_ItemSelected">
+                  ItemSelected="ListView_ItemSelected"
+                  HasUnevenRows="True">
             <ListView.Behaviors>
-                <Behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                <Behaviors:EventToCommandBehavior EventName="ItemTapped"
                                                   Command="{Binding NavigateImageListPageCommand}"
-                                                  EventArgsParameterPath="SelectedItem"/>
+                                                  EventArgsParameterPath="Item" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Tag}"
-                              Detail="{Binding ExampleTweet.Text}" />
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Frame BackgroundColor="{Binding ThemeColor}"
+                                   WidthRequest="25"
+                                   HeightRequest="25"
+                                   Margin="10"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Grid.RowSpan="2" />
+
+                            <Label Text="{Binding JpTag}"
+                                   Grid.Column="1" />
+                            <Grid Grid.Row="1"
+                                  Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Tweet例: "
+                                       FontSize="Small" 
+                                       Grid.Row="0"
+                                       Grid.Column="0" />
+                                <Label Text="{Binding ExampleTweet.Text}"
+                                       FontSize="Small"
+                                       Grid.Row="0" 
+                                       Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <Frame BackgroundColor="LightGray"
                Opacity="0.5"
                IsVisible="{Binding IsBusy}">
-            <ActivityIndicator IsRunning="True" 
+            <ActivityIndicator IsRunning="True"
                                VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="FillAndExpand"/>
+                               HorizontalOptions="FillAndExpand" />
         </Frame>
     </Grid>
 </ContentPage>

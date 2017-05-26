@@ -16,6 +16,7 @@ namespace ABC2017SpringDemoApp.ViewModels
         private ITwitterService TwitterServhce { get; }
         private IVisionService VisionService { get; }
         private INavigationService NavigationService { get; }
+        private ITranslatorService TranslatorService { get; }
 
         private IEnumerable<TagGroupViewModel> tags;
 
@@ -38,10 +39,14 @@ namespace ABC2017SpringDemoApp.ViewModels
         public DelegateCommand<TagGroupViewModel> NavigateImageListPageCommand { get; }
 
 
-        public MainPageViewModel(ITwitterService twitterService, IVisionService visionService, INavigationService navigationService)
+        public MainPageViewModel(ITwitterService twitterService, 
+            IVisionService visionService, 
+            ITranslatorService translatorService, 
+            INavigationService navigationService)
         {
             this.TwitterServhce = twitterService;
             this.VisionService = visionService;
+            this.TranslatorService = translatorService;
             this.NavigationService = navigationService;
 
             this.AnalyzeCommand = new DelegateCommand(async () => await this.AnalyzeExecuteAsync());
@@ -90,13 +95,17 @@ namespace ABC2017SpringDemoApp.ViewModels
             try
             {
                 var searchResults = await this.TwitterServhce.SearchImageAsync(Consts.SearchKeyword);
-                this.Tags = (await this.VisionService.TaggingAsync(searchResults))
+                var tasks = (await this.VisionService.TaggingAsync(searchResults))
                     .GroupBy(x => x.Tag)
-                    .Select(x => new TagGroupViewModel
+                    .Select(async x => new TagGroupViewModel
                     {
                         Tag = x.Key,
+                        JpTag = await this.TranslatorService.TranslateToJapaneseAsync(x.Key.Replace("_", " ").Trim()),
                         Images = x,
-                    });
+                    })
+                    .ToArray();
+                await Task.WhenAll(tasks);
+                this.Tags = tasks.Select(x => x.Result).ToArray();
             }
             catch (Exception ex)
             {

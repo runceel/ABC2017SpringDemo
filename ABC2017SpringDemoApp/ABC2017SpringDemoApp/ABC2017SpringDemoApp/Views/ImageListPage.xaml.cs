@@ -18,7 +18,9 @@ namespace ABC2017SpringDemoApp.Views
                 return;
             }
 
-            this.imagePreview.Source = ImageSource.FromUri(new Uri(((TaggedImage)e.SelectedItem).Image));
+            var item = (TaggedImage)e.SelectedItem;
+            this.labelCaption.Text = item.JpCaption;
+            this.imagePreview.Source = ImageSource.FromUri(new Uri(item.Image));
             this.frameImageHost.IsVisible = true;
             this.frameImageHostBackground.IsVisible = true;
 
@@ -29,6 +31,7 @@ namespace ABC2017SpringDemoApp.Views
         {
             this.frameImageHostBackground.IsVisible = false;
             this.frameImageHost.IsVisible = false;
+            this.labelCaption.Text = "";
             this.imagePreview.Source = null;
         }
     }
