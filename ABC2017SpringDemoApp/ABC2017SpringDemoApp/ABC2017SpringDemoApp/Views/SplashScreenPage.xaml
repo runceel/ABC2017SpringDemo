@@ -5,9 +5,18 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.SplashScreenPage">
     <StackLayout VerticalOptions="Center">
-        <Label Text="ABC2017 Spring"
+        <Label Text="ABC 2017 Spring"
                FontSize="Large"
                HorizontalOptions="Center"
                TextColor="LimeGreen" />
+        <Image Aspect="AspectFit"
+               HorizontalOptions="Center">
+            <Image.Source>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS, Android">logo.png</On>
+                    <On Platform="Windows">Assets/logo.png</On>
+                </OnPlatform>
+            </Image.Source>
+        </Image>
     </StackLayout>
 </ContentPage>

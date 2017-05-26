@@ -52,7 +52,7 @@ namespace ABC2017SpringDemoApp.Services
                     Debug.WriteLine(ex);
                 }
                 // 10 call / 1sec
-                await Task.Delay(150);
+                await Task.Delay(100);
             }
             return results;
         }

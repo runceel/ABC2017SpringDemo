@@ -4,7 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.ImageListPage"
-             Title="{Binding Data.JpTag, StringFormat='ABC2017 Spring ~ {0} ~'}">
+             Title="{Binding Data.JpTag, StringFormat='ABC 2017 Spring ~ {0} ~'}">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS">0,20,0,0</On>
