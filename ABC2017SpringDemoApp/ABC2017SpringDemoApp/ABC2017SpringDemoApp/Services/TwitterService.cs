@@ -24,7 +24,7 @@ namespace ABC2017SpringDemoApp.Services
 
         public async Task<IEnumerable<TwitterSearchResult>> SearchImageAsync(string filter)
         {
-            var results = await this.Tokens.Search.TweetsAsync(q => $"filter:images {filter} -RT", count => 500);
+            var results = await this.Tokens.Search.TweetsAsync(q => $"filter:images {filter} -RT", count => Consts.SearchCount);
             return results.Where(x => x.Entities.Media != null)
                 .Select(x => new TwitterSearchResult
                 {

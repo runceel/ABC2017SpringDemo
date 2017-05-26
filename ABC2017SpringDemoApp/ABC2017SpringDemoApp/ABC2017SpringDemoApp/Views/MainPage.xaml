@@ -5,7 +5,7 @@
              xmlns:Behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.MainPage"
-             Title="ABC2017 Spring ~ Album ~">
+             Title="ABC2017 Spring">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS">0,20,0,0</On>

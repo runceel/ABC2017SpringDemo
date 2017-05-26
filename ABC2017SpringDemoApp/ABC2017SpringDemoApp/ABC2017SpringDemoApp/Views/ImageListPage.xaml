@@ -5,15 +5,67 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ABC2017SpringDemoApp.Views.ImageListPage"
              Title="{Binding Data.Tag, StringFormat='ABC2017 Spring ~ {0} ~'}">
-    <ListView ItemsSource="{Binding Data.Images}"
-              ItemSelected="ListView_ItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ImageCell ImageSource="{Binding Image}"
-                           Text="{Binding OriginalTweet.Text}"
-                           Detail="{Binding OriginalTweet.User, StringFormat='@{0}'}" 
-                           Height="100" />
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <Grid>
+        <ListView ItemsSource="{Binding Data.Images}"
+                  ItemSelected="ListView_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding Image}"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   Aspect="AspectFit"
+                                   Grid.RowSpan="2"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+
+                            <Label Text="{Binding OriginalTweet.Text}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="Small" />
+                            <Label Text="{Binding OriginalTweet.User, StringFormat='@{0}'}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="Micro"
+                                   TextColor="DarkGray" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Frame x:Name="frameImageHostBackground" 
+               BackgroundColor="LightGray"
+               Opacity="0.3"
+               IsVisible="False"/>
+        <Frame x:Name="frameImageHost" 
+               BackgroundColor="Transparent"
+               IsVisible="False">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </Frame.GestureRecognizers>
+            <Image x:Name="imagePreview"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Frame>
+    </Grid>
 </ContentPage>

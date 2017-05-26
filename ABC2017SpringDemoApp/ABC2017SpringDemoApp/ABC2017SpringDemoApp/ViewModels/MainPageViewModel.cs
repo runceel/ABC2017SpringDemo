@@ -50,6 +50,11 @@ namespace ABC2017SpringDemoApp.ViewModels
 
         private async Task NavigateImageListPageExecuteAsync(TagGroupViewModel x)
         {
+            if (x == null)
+            {
+                return;
+            }
+
             await this.NavigationService.NavigateAsync("ImageListPage", new NavigationParameters
             {
                 { "data", x },
