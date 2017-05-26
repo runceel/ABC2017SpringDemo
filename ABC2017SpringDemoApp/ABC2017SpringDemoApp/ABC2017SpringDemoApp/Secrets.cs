@@ -14,5 +14,6 @@ namespace ABC2017SpringDemoApp
         public const string TwitterAccessTokenSecret = "";
 
         public const string CognitiveServiceComputerVisionAPIKey = "";
+        public const string CognitiveServiceTranslatorAPIKey = "";
     }
 }
